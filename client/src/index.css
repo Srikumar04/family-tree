@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #F5F0E8;
+    --color-surface: #EDE8DF;
+    --color-primary: #2D5016;
+    --color-accent: #C9A84C;
+    --color-text: #2C1810;
+    --color-text-muted: #7A6050;
+    --color-border: #D4C9B0;
+  }
+
+  .dark {
+    --color-bg: #1A1A1A;
+    --color-surface: #242424;
+    --color-primary: #4A7C2F;
+    --color-accent: #A88A3D;
+    --color-text: #F0EBE3;
+    --color-text-muted: #A89880;
+    --color-border: #3A3A3A;
+  }
+
+  html {
+    font-family: 'Lora', Georgia, serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  * {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-forest text-parchment font-body font-medium px-4 py-2 rounded-lg
+           hover:bg-forest-light active:scale-95 transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-forest text-forest font-body font-medium px-4 py-2 rounded-lg
+           hover:bg-forest hover:text-parchment active:scale-95 transition-all duration-150;
+  }
+
+  .btn-danger {
+    @apply bg-red-700 text-white font-body font-medium px-4 py-2 rounded-lg
+           hover:bg-red-800 active:scale-95 transition-all duration-150;
+  }
+
+  .card {
+    @apply bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-4 shadow-sm;
+  }
+
+  .input {
+    @apply w-full bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg px-3 py-2
+           text-[var(--color-text)] font-body placeholder:text-[var(--color-text-muted)]
+           focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-[var(--color-text-muted)] mb-1 font-body;
+  }
+}
+
+/* Tree canvas */
+.tree-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+.tree-canvas:active {
+  cursor: grabbing;
+}
+
+/* Skeleton pulse */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-border) 50%, var(--color-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
