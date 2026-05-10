@@ -24,15 +24,13 @@ export const seed = (): void => {
   db.exec('BEGIN');
   let p: Record<string, number>;
   try {
-    const ramesh = Number(insertPerson.run(treeId, 'Ramesh', 'Sharma', '1945-03-12', '2010-08-05', 'male', 'Patriarch of the Sharma family. Retired schoolteacher who loved cricket and gardening.').lastInsertRowid);
-    const kamla  = Number(insertPerson.run(treeId, 'Kamla',  'Sharma', '1948-07-22', null,         'female', 'Matriarch of the family. Known for her exceptional cooking and warm hospitality.').lastInsertRowid);
-    const arjun  = Number(insertPerson.run(treeId, 'Arjun',  'Sharma', '1972-11-03', null,         'male', 'Software engineer based in Bangalore. Loves hiking and photography.').lastInsertRowid);
-    const meera  = Number(insertPerson.run(treeId, 'Meera',  'Sharma', '1975-04-18', null,         'female', 'Doctor specialising in paediatrics. Lives in Mumbai.').lastInsertRowid);
-    const priya  = Number(insertPerson.run(treeId, 'Priya',  'Sharma', '1974-09-30', null,         'female', 'Architect and urban planner. Met Arjun in college.').lastInsertRowid);
-    const aanya  = Number(insertPerson.run(treeId, 'Aanya',  'Sharma', '2001-06-15', null,         'female', 'University student studying design.').lastInsertRowid);
-    const rohan  = Number(insertPerson.run(treeId, 'Rohan',  'Sharma', '2003-02-28', null,         'male', 'High school student and aspiring musician.').lastInsertRowid);
-    const dev    = Number(insertPerson.run(treeId, 'Dev',    'Sharma', '2007-12-10', null,         'male', 'The youngest — curious and full of energy.').lastInsertRowid);
-    p = { ramesh, kamla, arjun, meera, priya, aanya, rohan, dev };
+    const ramakrishnaiah = Number(insertPerson.run(treeId, 'Ramakrishnaiah', 'Thirunagari', null,         null, 'male',   'School Head Master').lastInsertRowid);
+    const lakshmDevamma  = Number(insertPerson.run(treeId, 'Lakshmi Devamma','Thirunagari', null,         null, 'female', 'Home maker').lastInsertRowid);
+    const raviKumar      = Number(insertPerson.run(treeId, 'Ravi Kumar',     'Thirunagari', '1973-08-31', null, 'male',   'Owner of Chandrika Cell point').lastInsertRowid);
+    const sridevi        = Number(insertPerson.run(treeId, 'Sridevi',        'Thirunagari', '1980-02-21', null, 'female', 'Home maker').lastInsertRowid);
+    const vyshnavi       = Number(insertPerson.run(treeId, 'Vyshnavi',       'Thirunagari', '2001-08-03', null, 'female', 'Scientific Officer').lastInsertRowid);
+    const sriKumar       = Number(insertPerson.run(treeId, 'Sri Kumar',      'Thirunagari', '2004-10-10', null, 'male',   'Working At Moveinsync Company').lastInsertRowid);
+    p = { ramakrishnaiah, lakshmDevamma, raviKumar, sridevi, vyshnavi, sriKumar };
     db.exec('COMMIT');
   } catch (e) {
     db.exec('ROLLBACK');
@@ -45,22 +43,15 @@ export const seed = (): void => {
 
   db.exec('BEGIN');
   try {
-    insertRel.run(treeId, p.ramesh, p.kamla,  'spouse');
-    insertRel.run(treeId, p.arjun,  p.priya,  'spouse');
-    insertRel.run(treeId, p.ramesh, p.arjun,  'parent-child');
-    insertRel.run(treeId, p.ramesh, p.meera,  'parent-child');
-    insertRel.run(treeId, p.kamla,  p.arjun,  'parent-child');
-    insertRel.run(treeId, p.kamla,  p.meera,  'parent-child');
-    insertRel.run(treeId, p.arjun,  p.aanya,  'parent-child');
-    insertRel.run(treeId, p.arjun,  p.rohan,  'parent-child');
-    insertRel.run(treeId, p.arjun,  p.dev,    'parent-child');
-    insertRel.run(treeId, p.priya,  p.aanya,  'parent-child');
-    insertRel.run(treeId, p.priya,  p.rohan,  'parent-child');
-    insertRel.run(treeId, p.priya,  p.dev,    'parent-child');
-    insertRel.run(treeId, p.arjun,  p.meera,  'sibling');
-    insertRel.run(treeId, p.aanya,  p.rohan,  'sibling');
-    insertRel.run(treeId, p.aanya,  p.dev,    'sibling');
-    insertRel.run(treeId, p.rohan,  p.dev,    'sibling');
+    insertRel.run(treeId, p.ramakrishnaiah, p.lakshmDevamma, 'spouse');
+    insertRel.run(treeId, p.ramakrishnaiah, p.raviKumar,     'parent-child');
+    insertRel.run(treeId, p.lakshmDevamma,  p.raviKumar,     'parent-child');
+    insertRel.run(treeId, p.raviKumar,      p.sridevi,       'spouse');
+    insertRel.run(treeId, p.raviKumar,      p.vyshnavi,      'parent-child');
+    insertRel.run(treeId, p.raviKumar,      p.sriKumar,      'parent-child');
+    insertRel.run(treeId, p.sridevi,        p.vyshnavi,      'parent-child');
+    insertRel.run(treeId, p.sridevi,        p.sriKumar,      'parent-child');
+    insertRel.run(treeId, p.vyshnavi,       p.sriKumar,      'sibling');
     db.exec('COMMIT');
   } catch (e) {
     db.exec('ROLLBACK');
